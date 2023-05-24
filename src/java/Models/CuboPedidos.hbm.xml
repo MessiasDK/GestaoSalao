@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 24, 2023 9:05:47 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Models.CuboPedidos" table="cubo_pedidos" catalog="kand" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="idPedido" type="java.lang.Integer">
+            <column name="id_pedido" />
+        </property>
+        <property name="data" type="timestamp">
+            <column name="data" length="19" />
+        </property>
+        <property name="idCliente" type="java.lang.Integer">
+            <column name="id_cliente" />
+        </property>
+        <property name="nomeCliente" type="string">
+            <column name="nome_cliente" length="95" />
+        </property>
+        <property name="sexoCliente" type="string">
+            <column name="sexo_cliente" length="2" />
+        </property>
+        <property name="idadeCliente" type="java.lang.Integer">
+            <column name="idade_cliente" />
+        </property>
+        <property name="idProduto" type="java.lang.Integer">
+            <column name="id_produto" />
+        </property>
+        <property name="produto" type="string">
+            <column name="produto" length="95" />
+        </property>
+        <property name="precoAtual" type="java.lang.Float">
+            <column name="preco_atual" precision="12" scale="0" />
+        </property>
+        <property name="qtdeComprada" type="java.lang.Integer">
+            <column name="qtde_comprada" />
+        </property>
+        <property name="valorPagoUnidade" type="java.lang.Float">
+            <column name="valor_pago_unidade" precision="12" scale="0" />
+        </property>
+        <property name="total" type="java.lang.Float">
+            <column name="total" precision="12" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 24, 2023 9:05:47 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Models.PedidosHasProdutos" table="pedidos_has_produtos" catalog="kand" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pedidos" class="Models.Pedidos" fetch="select">
+            <column name="id_pedido" />
+        </many-to-one>
+        <many-to-one name="produtos" class="Models.Produtos" fetch="select">
+            <column name="id_produto" />
+        </many-to-one>
+        <property name="qtde" type="java.lang.Integer">
+            <column name="qtde" />
+        </property>
+        <property name="valor" type="java.lang.Float">
+            <column name="valor" precision="12" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

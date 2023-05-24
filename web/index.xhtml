@@ -1,13 +1,84 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Tabela Clientes</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        
+        
+        <h:form>
+            <p:commandButton value="Adicionar Clientes" actionListener="#{clientesControl.apagarClientes()}" oncomplete="PF('dialogoAdicionar').show();" update=":formAdicionar"/>
+            <p:separator/>
+        </h:form>
+        
+         <h:form id="formListado">
+             <p:dataTable id="tabelaClientes" paginator="true" paginatorPosition="bottom" rows="5" var="clientes" value="#{clientesControl.listaClientes}" emptyMessage="Nao existem Clientes">
+                            <p:column headerText="ID Cliente">
+                                <h:outputText value="#{clientes.id}" />
+                            </p:column>
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{clientes.nome}" />
+                            </p:column>
+                            <p:column headerText="idade">
+                                <h:outputText value="#{clientes.idade}" />
+                            </p:column>
+                            <p:column headerText="Sexo">
+                                <h:outputText value="#{clientes.sexo}" />
+                            </p:column>
+                            <p:column headerText="MODIFICAR" style="text-align: center">
+                                <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                                    <f:setPropertyActionListener target="#{clientesControl.clientes}" value="#{cliente}"/>
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="ELIMINAR" style="text-align: center">
+                                <p:commandButton icon="ui-icon-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                                    <f:setPropertyActionListener target="#{clientesControl.clientes}" value="#{clientes}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+        
+        
+        <h:form id="formAdicionar">
+                        <p:dialog id="dlgAdicionar" header="Adicionar Clientes" widgetVar="dialogoAdicionar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                            <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                                <p:outputLabel value="Clientes:"/>
+                                <p:inputText value="#{clientesControl.clientes.nome}"/>
+                                  <p:outputLabel value="Clientes:"/>
+                                <p:inputText value="#{clientesControl.clientes.sexo}"/>
+                                  <p:outputLabel value="Clientes:"/>
+                                <p:inputText value="#{clientesControl.clientes.idade}"/>
+                              
+                            </p:panelGrid>
+                            <p:commandButton  value="Guardar" actionListener="#{clientesControl.adicionarClientes()}" update=":formListado:tabelaClientes" oncomplete="PF('dialogoAdicionar').hide();"/>
+                            <p:commandButton  value="Cancelar" onclick="PF('dialogoAdicionar').hide();"/>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formModificar">
+                        <p:dialog id="dlgModificar" header="Modificar Clientes" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                            <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                                <p:outputLabel value="Clientes:"/>
+                                <p:inputText value="#{clientesControl.clientes.nome}"/>
+                                
+                            </p:panelGrid>
+                            <p:commandButton  value="Guardar" actionListener="#{clientesControl.modificarClientes()}" update=":formListado:tabelaClientes" oncomplete="PF('dialogoModificar').hide();"/>
+                            <p:commandButton  value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEliminar">
+                        <p:dialog id="dlgEliminar" header="Eliminar Clientes" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                            <h:outputText value="Deseja eliminar este registro?"/>
+                            <p:commandButton  value="Sim" actionListener="#{clientesControl.eliminarClientes()}" update=":formListado:tabelaClientes" oncomplete="PF('dialogoEliminar').hide();"/>
+                            <p:commandButton  value="Nao" onclick="PF('dialogoEliminar').hide();"/>
+                        </p:dialog>
+                    </h:form>
+        
     </h:body>
 </html>
-
 
